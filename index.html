@@ -1,310 +1,350 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Crotch Sac Order Form</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 50;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-        
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 50;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
 
-        .fade-in {
-            animation: fadeIn 0.3s ease-in;
-        }
+      .modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+      .fade-in {
+        animation: fadeIn 0.3s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
         }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
     </style>
-</head>
-<body class="bg-gray-100 min-h-screen">
+  </head>
+  <body class="bg-gray-100 min-h-screen">
     <!-- Main Content -->
     <div class="container mx-auto px-4 py-16">
-        <div class="max-w-4xl mx-auto text-center">
-            <h1 class="text-4xl font-bold text-gray-800 mb-4">Crotch Sac™ - Clam Edition</h1>
-            <p class="text-lg text-gray-600 mb-8">Experience ultimate comfort and support with our premium Crotch Sac™</p>
-            
-            <button 
-                id="openModalBtn" 
-                class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition duration-300 transform hover:scale-105 shadow-lg">
-                Order Your Crotch Sac™ Now
-            </button>
-        </div>
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">
+          Crotch Sac™ - Clam Edition
+        </h1>
+        <p class="text-lg text-gray-600 mb-8">
+          Experience ultimate comfort and support with our premium Crotch Sac™
+        </p>
+
+        <button
+          id="openModalBtn"
+          class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition duration-300 transform hover:scale-105 shadow-lg"
+        >
+          Order Your Crotch Sac™ Now
+        </button>
+      </div>
     </div>
 
     <!-- Modal -->
     <div id="orderModal" class="modal">
-        <div class="bg-white rounded-lg shadow-2xl max-w-2xl w-full mx-4 fade-in max-h-[90vh] overflow-y-auto">
-            <!-- Modal Header -->
-            <div class="bg-blue-600 text-white p-6 rounded-t-lg">
-                <div class="flex justify-between items-center">
-                    <h2 class="text-2xl font-bold">Order Crotch Sac™</h2>
-                    <button id="closeModalBtn" class="text-white hover:text-gray-200 text-3xl font-bold leading-none">
-                        &times;
-                    </button>
-                </div>
-                <p class="text-blue-100 mt-2">Fill out the form below to customize your order</p>
-            </div>
-
-            <!-- Modal Body -->
-            <div class="p-6">
-                <form id="orderForm" class="space-y-4">
-                    <!-- Customer Information -->
-                    <div class="border-b pb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Customer Information</h3>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">
-                                    First Name <span class="text-red-500">*</span>
-                                </label>
-                                <input 
-                                    type="text" 
-                                    id="firstName" 
-                                    name="firstName" 
-                                    required
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    placeholder="John">
-                            </div>
-                            
-                            <div>
-                                <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">
-                                    Last Name <span class="text-red-500">*</span>
-                                </label>
-                                <input 
-                                    type="text" 
-                                    id="lastName" 
-                                    name="lastName" 
-                                    required
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    placeholder="Doe">
-                            </div>
-                        </div>
-
-                        <div class="mt-4">
-                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
-                                Email Address <span class="text-red-500">*</span>
-                            </label>
-                            <input 
-                                type="email" 
-                                id="email" 
-                                name="email" 
-                                required
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="john.doe@example.com">
-                        </div>
-
-                        <div class="mt-4">
-                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">
-                                Phone Number
-                            </label>
-                            <input 
-                                type="tel" 
-                                id="phone" 
-                                name="phone"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="(555) 123-4567">
-                        </div>
-                    </div>
-
-                    <!-- Product Customization -->
-                    <div class="border-b pb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Product Customization</h3>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="size" class="block text-sm font-medium text-gray-700 mb-1">
-                                    Size <span class="text-red-500">*</span>
-                                </label>
-                                <select 
-                                    id="size" 
-                                    name="size" 
-                                    required
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                    <option value="">Select a size</option>
-                                    <option value="small">Small</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="large">Large</option>
-                                    <option value="xl">X-Large</option>
-                                    <option value="xxl">XX-Large</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label for="color" class="block text-sm font-medium text-gray-700 mb-1">
-                                    Color <span class="text-red-500">*</span>
-                                </label>
-                                <select 
-                                    id="color" 
-                                    name="color" 
-                                    required
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                    <option value="">Select a color</option>
-                                    <option value="black">Black</option>
-                                    <option value="navy">Navy Blue</option>
-                                    <option value="gray">Gray</option>
-                                    <option value="camo">Camouflage</option>
-                                    <option value="red">Red</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="material" class="block text-sm font-medium text-gray-700 mb-1">
-                                    Material <span class="text-red-500">*</span>
-                                </label>
-                                <select 
-                                    id="material" 
-                                    name="material" 
-                                    required
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                    <option value="">Select material</option>
-                                    <option value="cotton">100% Cotton</option>
-                                    <option value="bamboo">Bamboo Blend</option>
-                                    <option value="modal">Modal</option>
-                                    <option value="microfiber">Microfiber</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label for="quantity" class="block text-sm font-medium text-gray-700 mb-1">
-                                    Quantity <span class="text-red-500">*</span>
-                                </label>
-                                <input 
-                                    type="number" 
-                                    id="quantity" 
-                                    name="quantity" 
-                                    min="1" 
-                                    max="10" 
-                                    value="1"
-                                    required
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Additional Options -->
-                    <div class="border-b pb-4">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Additional Options</h3>
-                        
-                        <div class="space-y-3">
-                            <div class="flex items-center">
-                                <input 
-                                    type="checkbox" 
-                                    id="giftWrap" 
-                                    name="giftWrap"
-                                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                                <label for="giftWrap" class="ml-2 text-sm text-gray-700">
-                                    Gift wrap (+$5.00)
-                                </label>
-                            </div>
-
-                            <div class="flex items-center">
-                                <input 
-                                    type="checkbox" 
-                                    id="rushDelivery" 
-                                    name="rushDelivery"
-                                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                                <label for="rushDelivery" class="ml-2 text-sm text-gray-700">
-                                    Rush delivery (+$15.00)
-                                </label>
-                            </div>
-
-                            <div class="flex items-center">
-                                <input 
-                                    type="checkbox" 
-                                    id="customization" 
-                                    name="customization"
-                                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                                <label for="customization" class="ml-2 text-sm text-gray-700">
-                                    Custom embroidery (+$10.00)
-                                </label>
-                            </div>
-                        </div>
-
-                        <div id="customizationText" class="mt-3 hidden">
-                            <label for="embroideryText" class="block text-sm font-medium text-gray-700 mb-1">
-                                Embroidery Text (max 20 characters)
-                            </label>
-                            <input 
-                                type="text" 
-                                id="embroideryText" 
-                                name="embroideryText"
-                                maxlength="20"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="Enter text for embroidery">
-                        </div>
-                    </div>
-
-                    <!-- Special Instructions -->
-                    <div>
-                        <label for="specialInstructions" class="block text-sm font-medium text-gray-700 mb-1">
-                            Special Instructions or Comments
-                        </label>
-                        <textarea 
-                            id="specialInstructions" 
-                            name="specialInstructions"
-                            rows="3"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Any additional details or requests..."></textarea>
-                    </div>
-
-                    <!-- Error Message -->
-                    <div id="errorMessage" class="hidden bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
-                        <p class="font-medium">Error!</p>
-                        <p id="errorText" class="text-sm"></p>
-                    </div>
-
-                    <!-- Success Message -->
-                    <div id="successMessage" class="hidden bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md">
-                        <p class="font-medium">Success!</p>
-                        <p class="text-sm">Your order has been submitted successfully. We'll contact you shortly!</p>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <div class="flex gap-3 pt-4">
-                        <button 
-                            type="submit" 
-                            id="submitBtn"
-                            class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                            Submit Order
-                        </button>
-                        <button 
-                            type="button" 
-                            id="cancelBtn"
-                            class="px-6 py-3 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 font-medium transition duration-300">
-                            Cancel
-                        </button>
-                    </div>
-                </form>
-            </div>
+      <div
+        class="bg-white rounded-lg shadow-2xl max-w-2xl w-full mx-4 fade-in max-h-[90vh] overflow-y-auto"
+      >
+        <!-- Modal Header -->
+        <div class="bg-blue-600 text-white p-6 rounded-t-lg">
+          <div class="flex justify-between items-center">
+            <h2 class="text-2xl font-bold">Order Crotch Sac™</h2>
+            <button
+              id="closeModalBtn"
+              class="text-white hover:text-gray-200 text-3xl font-bold leading-none"
+            >
+              &times;
+            </button>
+          </div>
+          <p class="text-blue-100 mt-2">
+            Fill out the form below to customize your order
+          </p>
         </div>
+
+        <!-- Modal Body -->
+        <div class="p-6">
+          <form id="orderForm" class="space-y-4">
+            <!-- Customer Information -->
+            <div class="border-b pb-4">
+              <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                Customer Information
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label
+                    for="firstName"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >First Name <span class="text-red-500">*</span></label
+                  >
+                  <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    required
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="John"
+                  />
+                </div>
+                <div>
+                  <label
+                    for="lastName"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >Last Name <span class="text-red-500">*</span></label
+                  >
+                  <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    required
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Doe"
+                  />
+                </div>
+              </div>
+              <div class="mt-4">
+                <label
+                  for="email"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                  >Email Address <span class="text-red-500">*</span></label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="john.doe@example.com"
+                />
+              </div>
+            </div>
+            <!-- Crotch-Sac Customizations -->
+            <div class="border-b pb-4">
+              <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                Crotch-Sac™ Customizations
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label
+                    for="bagColor"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >Bag Color</label
+                  >
+                  <input
+                    type="text"
+                    id="bagColor"
+                    name="bagColor"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="e.g. Blue"
+                  />
+                </div>
+                <div>
+                  <label
+                    for="trimColor"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >Trim Color</label
+                  >
+                  <input
+                    type="text"
+                    id="trimColor"
+                    name="trimColor"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="e.g. Red"
+                  />
+                </div>
+              </div>
+              <div class="mt-4 flex items-center">
+                <input
+                  type="checkbox"
+                  id="surpriseMe"
+                  name="surpriseMe"
+                  class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                />
+                <label for="surpriseMe" class="ml-2 text-sm text-gray-700"
+                  >Surprise Me!</label
+                >
+              </div>
+            </div>
+            <!-- Add-ons -->
+            <div class="border-b pb-4">
+              <h3 class="text-lg font-semibold text-gray-800 mb-3">Add-ons</h3>
+              <div class="space-y-3">
+                <div class="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="topoMap"
+                    name="topoMap"
+                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <label for="topoMap" class="ml-2 text-sm text-gray-700"
+                    >Topo Map</label
+                  >
+                </div>
+                <div class="mt-2">
+                  <label
+                    for="drainageText"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >Enter Drainage (Topo Map)</label
+                  >
+                  <input
+                    type="text"
+                    id="drainageText"
+                    name="drainageText"
+                    maxlength="30"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Drainage details"
+                  />
+                </div>
+                <div class="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="paddleClips"
+                    name="paddleClips"
+                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <label for="paddleClips" class="ml-2 text-sm text-gray-700"
+                    >Paddle Clips</label
+                  >
+                </div>
+                <div class="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="paddedBody"
+                    name="paddedBody"
+                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <label for="paddedBody" class="ml-2 text-sm text-gray-700"
+                    >Padded Body</label
+                  >
+                </div>
+                <div class="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="happySwimsValve"
+                    name="happySwimsValve"
+                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <label
+                    for="happySwimsValve"
+                    class="ml-2 text-sm text-gray-700"
+                    >Happy Swims Inflation Valve</label
+                  >
+                </div>
+                <div class="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="packTowel"
+                    name="packTowel"
+                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <label for="packTowel" class="ml-2 text-sm text-gray-700"
+                    >Pack Towel</label
+                  >
+                </div>
+                <div class="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="keyRing"
+                    name="keyRing"
+                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <label for="keyRing" class="ml-2 text-sm text-gray-700"
+                    >Key Ring</label
+                  >
+                </div>
+                <div class="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="phoneStrap"
+                    name="phoneStrap"
+                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <label for="phoneStrap" class="ml-2 text-sm text-gray-700"
+                    >Phone Strap</label
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Special Instructions -->
+            <div>
+              <label
+                for="specialInstructions"
+                class="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Special Instructions or Comments
+              </label>
+              <textarea
+                id="specialInstructions"
+                name="specialInstructions"
+                rows="3"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Any additional details or requests..."
+              ></textarea>
+            </div>
+
+            <!-- Error Message -->
+            <div
+              id="errorMessage"
+              class="hidden bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md"
+            >
+              <p class="font-medium">Error!</p>
+              <p id="errorText" class="text-sm"></p>
+            </div>
+
+            <!-- Success Message -->
+            <div
+              id="successMessage"
+              class="hidden bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md"
+            >
+              <p class="font-medium">Success!</p>
+              <p class="text-sm">
+                Your order has been submitted successfully. We'll contact you
+                shortly!
+              </p>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex gap-3 pt-4">
+              <button
+                type="submit"
+                id="submitBtn"
+                class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              >
+                Submit Order
+              </button>
+              <button
+                type="button"
+                id="cancelBtn"
+                class="px-6 py-3 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 font-medium transition duration-300"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
 
     <script src="form-handler.js"></script>
-</body>
+  </body>
 </html>
