@@ -142,6 +142,7 @@ orderForm.addEventListener("submit", async (e) => {
     // Show success message
     console.log("[Form] Order sent successfully");
     successMessage.classList.remove("hidden");
+    // Do NOT close or reset the modal or form here. Only user action closes modal.
   } catch (error) {
     // Show error message
     console.error("[Form] Error during submission:", error);
