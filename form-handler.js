@@ -141,11 +141,6 @@ orderForm.addEventListener("submit", async (e) => {
     // Show success message
     console.log("[Form] Order sent successfully");
     successMessage.classList.remove("hidden");
-
-    // Reset form after short delay
-    setTimeout(() => {
-      closeModal();
-    }, 2000);
   } catch (error) {
     // Show error message
     console.error("[Form] Error during submission:", error);
