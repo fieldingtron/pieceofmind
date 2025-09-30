@@ -18,6 +18,7 @@ openModalBtn.addEventListener("click", () => {
 
 // Close modal function
 function closeModal() {
+  console.log("[Modal] closeModal called");
   modal.classList.remove("active");
   document.body.style.overflow = "auto";
   // Reset form and messages
