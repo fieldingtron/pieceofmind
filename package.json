@@ -1,0 +1,24 @@
+{
+  "name": "pieceofmind",
+  "version": "1.0.0",
+  "description": "A responsive modal email form built with Tailwind CSS and vanilla JavaScript for collecting custom orders for Crotch Sac™ products. The form integrates with the Resend API for email delivery.",
+  "main": "api-example.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fieldingtron/pieceofmind.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/fieldingtron/pieceofmind/issues"
+  },
+  "homepage": "https://github.com/fieldingtron/pieceofmind#readme",
+  "dependencies": {
+    "resend": "^6.1.1"
+  }
+}
