@@ -59,6 +59,7 @@ customizationCheckbox.addEventListener("change", () => {
 orderForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  console.log("[Form] Submit triggered");
   // Hide previous messages
   errorMessage.classList.add("hidden");
   successMessage.classList.add("hidden");
@@ -84,11 +85,17 @@ orderForm.addEventListener("submit", async (e) => {
         orderData[key] = value;
       }
     });
+    console.log("[Form] Gathered orderData:", orderData);
 
     // Add unchecked checkboxes
     if (!orderData.giftWrap) orderData.giftWrap = false;
     if (!orderData.rushDelivery) orderData.rushDelivery = false;
     if (!orderData.customization) orderData.customization = false;
+    console.log("[Form] Checkbox normalization:", {
+      giftWrap: orderData.giftWrap,
+      rushDelivery: orderData.rushDelivery,
+      customization: orderData.customization,
+    });
 
     // Calculate total price
     let totalPrice = 29.99; // Base price
@@ -97,6 +104,7 @@ orderForm.addEventListener("submit", async (e) => {
     if (orderData.rushDelivery) totalPrice += 15.0;
     if (orderData.customization) totalPrice += 10.0;
     orderData.totalPrice = totalPrice.toFixed(2);
+    console.log("[Form] Calculated totalPrice:", orderData.totalPrice);
 
     // Validate required fields
     if (
@@ -107,26 +115,31 @@ orderForm.addEventListener("submit", async (e) => {
       !orderData.color ||
       !orderData.material
     ) {
+      console.error("[Form] Missing required fields", orderData);
       throw new Error("Please fill in all required fields");
     }
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(orderData.email)) {
+      console.error("[Form] Invalid email format", orderData.email);
       throw new Error("Please enter a valid email address");
     }
 
     // Validate customization text if checked
     if (orderData.customization && !orderData.embroideryText) {
+      console.error("[Form] Missing embroidery text");
       throw new Error(
         "Please enter embroidery text or uncheck the customization option"
       );
     }
 
     // Send data to Resend API
+    console.log("[Form] Sending orderData to API:", orderData);
     await sendOrderEmail(orderData);
 
     // Show success message
+    console.log("[Form] Order sent successfully");
     successMessage.classList.remove("hidden");
 
     // Reset form after short delay
@@ -135,6 +148,7 @@ orderForm.addEventListener("submit", async (e) => {
     }, 2000);
   } catch (error) {
     // Show error message
+    console.error("[Form] Error during submission:", error);
     errorMessage.classList.remove("hidden");
     document.getElementById("errorText").textContent = error.message;
 
@@ -159,6 +173,11 @@ async function sendOrderEmail(orderData) {
     // In a real implementation, you would make a POST request to your backend
     // which would then call the Resend API with your API key
 
+    console.log("[Form] API call payload:", {
+      to: orderData.email,
+      subject: `Order Confirmation: Crotch Sac™`,
+      html: formatOrderEmail(orderData),
+    });
     const response = await fetch("/api/send-email", {
       method: "POST",
       headers: {
@@ -170,10 +189,13 @@ async function sendOrderEmail(orderData) {
         html: formatOrderEmail(orderData),
       }),
     });
+    console.log("[Form] API response status:", response.status);
     if (!response.ok) {
       const errorData = await response.json();
+      console.error("[Form] API error response:", errorData);
       throw new Error(errorData.error || "Failed to send email");
     }
+    console.log("[Form] API call successful");
     return true;
   } catch (error) {
     console.error("Error sending email:", error);
