@@ -110,11 +110,7 @@ orderForm.addEventListener("submit", async (e) => {
     console.log("[Form] Calculated totalPrice:", orderData.totalPrice);
 
     // Validate required fields
-    if (
-      !orderData.firstName ||
-      !orderData.lastName ||
-      !orderData.email
-    ) {
+    if (!orderData.firstName || !orderData.lastName || !orderData.email) {
       console.error("[Form] Missing required fields", orderData);
       throw new Error("Please fill in all required fields");
     }
@@ -169,7 +165,7 @@ async function sendOrderEmail(orderData) {
       subject: `Order Confirmation: Crotch Sac™`,
       html: emailContent,
     });
-    
+
     // Make sure we're using the correct endpoint
     const response = await fetch("/api/send-email", {
       method: "POST",
