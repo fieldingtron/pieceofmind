@@ -58,7 +58,9 @@ customizationCheckbox.addEventListener("change", () => {
 
 // Form validation and submission
 orderForm.addEventListener("submit", async (e) => {
+  // Stop the default form submission which would cause page reload
   e.preventDefault();
+  e.stopPropagation();
 
   console.log("[Form] Submit triggered");
   // Hide previous messages
@@ -111,10 +113,7 @@ orderForm.addEventListener("submit", async (e) => {
     if (
       !orderData.firstName ||
       !orderData.lastName ||
-      !orderData.email ||
-      !orderData.size ||
-      !orderData.color ||
-      !orderData.material
+      !orderData.email
     ) {
       console.error("[Form] Missing required fields", orderData);
       throw new Error("Please fill in all required fields");
@@ -160,21 +159,18 @@ orderForm.addEventListener("submit", async (e) => {
 async function sendOrderEmail(orderData) {
   // In production, you would replace this URL with your actual backend endpoint
   // that securely handles the Resend API call with your API key
-  const RESEND_API_ENDPOINT = "/api/send-order"; // Replace with your actual endpoint
-
   // Format the email content
   const emailContent = formatOrderEmail(orderData);
 
   try {
-    // This is a placeholder for the actual API call
-    // In a real implementation, you would make a POST request to your backend
-    // which would then call the Resend API with your API key
-
+    // Prepare API call to Resend endpoint
     console.log("[Form] API call payload:", {
       to: orderData.email,
       subject: `Order Confirmation: Crotch Sac™`,
-      html: formatOrderEmail(orderData),
+      html: emailContent,
     });
+    
+    // Make sure we're using the correct endpoint
     const response = await fetch("/api/send-email", {
       method: "POST",
       headers: {
@@ -183,7 +179,7 @@ async function sendOrderEmail(orderData) {
       body: JSON.stringify({
         to: orderData.email,
         subject: `Order Confirmation: Crotch Sac™`,
-        html: formatOrderEmail(orderData),
+        html: emailContent,
       }),
     });
     console.log("[Form] API response status:", response.status);
