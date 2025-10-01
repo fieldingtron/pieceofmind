@@ -1,8 +1,4 @@
-// Modal functionality
-const modal = document.getElementById("orderModal");
-const openModalBtn = document.getElementById("openModalBtn");
-const closeModalBtn = document.getElementById("closeModalBtn");
-const cancelBtn = document.getElementById("cancelBtn");
+// Form elements
 const orderForm = document.getElementById("orderForm");
 const customizationCheckbox = document.getElementById("customization");
 const customizationTextDiv = document.getElementById("customizationText");
@@ -10,41 +6,11 @@ const errorMessage = document.getElementById("errorMessage");
 const successMessage = document.getElementById("successMessage");
 const submitBtn = document.getElementById("submitBtn");
 
-// Open modal
-openModalBtn.addEventListener("click", () => {
-  modal.classList.add("active");
-  document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
-});
-
-// Close modal function
-function closeModal() {
-  console.log("[Modal] closeModal called");
-  modal.classList.remove("active");
-  document.body.style.overflow = "auto";
-  // Reset form and messages
-  orderForm.reset();
+// Helper function to reset form messages
+function resetFormMessages() {
   errorMessage.classList.add("hidden");
   successMessage.classList.add("hidden");
-  customizationTextDiv.classList.add("hidden");
 }
-
-// Close modal on button click
-closeModalBtn.addEventListener("click", closeModal);
-cancelBtn.addEventListener("click", closeModal);
-
-// Close modal when clicking outside
-modal.addEventListener("click", (e) => {
-  if (e.target === modal) {
-    closeModal();
-  }
-});
-
-// Close modal on ESC key
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && modal.classList.contains("active")) {
-    closeModal();
-  }
-});
 
 // Show/hide customization text field
 customizationCheckbox.addEventListener("change", () => {
@@ -64,8 +30,7 @@ orderForm.addEventListener("submit", async (e) => {
 
   console.log("[Form] Submit triggered");
   // Hide previous messages
-  errorMessage.classList.add("hidden");
-  successMessage.classList.add("hidden");
+  resetFormMessages();
 
   // Disable submit button to prevent double submission
   submitBtn.disabled = true;
@@ -137,7 +102,14 @@ orderForm.addEventListener("submit", async (e) => {
     // Show success message
     console.log("[Form] Order sent successfully");
     successMessage.classList.remove("hidden");
-    // Do NOT close or reset the modal or form here. Only user action closes modal.
+
+    // Reset the form but keep the success message visible
+    orderForm.reset();
+
+    // Re-enable submit button
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Submit Another Order";
+    submitBtn.classList.remove("opacity-75", "cursor-not-allowed");
   } catch (error) {
     // Show error message
     console.error("[Form] Error during submission:", error);
