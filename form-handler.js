@@ -434,49 +434,55 @@ async function sendOrderEmail(orderData) {
 // Function to format the order data into HTML email content
 function formatOrderEmail(orderData) {
   return `
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <style>
-                body {
-                    font-family: Arial, sans-serif;
-                    line-height: 1.6;
-                    color: #333;
-                    max-width: 600px;
-                    margin: 0 auto;
-                    padding: 20px;
-                }
-                .header {
-                    background-color: #2563eb;
-                    color: white;
-                    padding: 20px;
-                    text-align: center;
-                    border-radius: 5px 5px 0 0;
-                }
-                .content {
-                    background-color: #f9f9f9;
-                    padding: 20px;
-                    border: 1px solid #ddd;
-                }
-                .section {
-                    margin-bottom: 20px;
-                    padding-bottom: 15px;
-                    border-bottom: 1px solid #ddd;
-                }
-                .section:last-child {
-                    border-bottom: none;
-                }
-                .label {
-                    font-weight: bold;
-                    color: #2563eb;
-                }
-                .value {
-                    margin-left: 10px;
-                }
-                .total {
-                    font-size: 1.2em;
-                    font-weight: bold;
-                    color: #2563eb;
+        try {
+          const formData = new FormData(orderForm);
+          const orderData = {};
+          formData.forEach((value, key) => {
+            if (
+              key === "giftWrap" ||
+              key === "rushDelivery" ||
+              key === "customization"
+            ) {
+              orderData[key] = true;
+            } else {
+              orderData[key] = value;
+            }
+          });
+          console.log("[Form] Gathered orderData:", orderData);
+
+          // Honeypot spam trap
+          if (orderData.website && orderData.website.trim() !== "") {
+            console.warn("[Form] Spam detected by honeypot field.");
+            throw new Error("Spam detected. Submission blocked.");
+          }
+
+          if (!orderData.giftWrap) orderData.giftWrap = false;
+          if (!orderData.rushDelivery) orderData.rushDelivery = false;
+          if (!orderData.customization) orderData.customization = false;
+          console.log("[Form] Checkbox normalization:", {
+            giftWrap: orderData.giftWrap,
+            rushDelivery: orderData.rushDelivery,
+            customization: orderData.customization,
+          });
+
+          let totalPrice = 29.99;
+          totalPrice += orderData.quantity ? (orderData.quantity - 1) * 29.99 : 0;
+          if (orderData.giftWrap) totalPrice += 5.0;
+          if (orderData.rushDelivery) totalPrice += 15.0;
+          if (orderData.customization) totalPrice += 10.0;
+          orderData.totalPrice = totalPrice.toFixed(2);
+          console.log("[Form] Calculated totalPrice:", orderData.totalPrice);
+
+          if (!orderData.firstName || !orderData.lastName || !orderData.email) {
+            console.error("[Form] Missing required fields", orderData);
+            throw new Error("Please fill in all required fields");
+          }
+
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(orderData.email)) {
+            console.error("[Form] Invalid email format", orderData.email);
+            throw new Error("Please enter a valid email address");
+          }
                     text-align: right;
                     margin-top: 20px;
                 }
