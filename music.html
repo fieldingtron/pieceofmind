@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      /* 1) Load your Jianpu ASCII font */
+      @font-face {
+        font-family: "JianpuASCII";
+        src: url("./JianpuASCII.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
+      .line {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(1.8ch, auto); /* width per note cell */
+        gap: 0.6ch;
+        align-items: end;
+        font-size: 24px; /* scale both rows together */
+      }
+      .cell {
+        display: grid;
+        grid-template-rows: auto auto; /* row 1: note, row 2: lyric */
+        justify-items: center; /* center both note and lyric horizontally */
+      }
+      .note {
+        font-family: "JianpuASCII", monospace;
+        line-height: 1;
+      }
+      .lyric {
+        font-family: system-ui, sans-serif;
+        font-size: 0.9em;
+        line-height: 1;
+        margin-top: 0.2em;
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="score" class="line"></div>
+
+    <script>
+      // Example input
+      const notesStr = "5 .5 6' 1 1 2. 3 2 1";
+      // Syllables: “ha-ppy _ birth-day _ to _ you”
+      // use "" (empty) or "_" to sustain the previous syllable over this note cell
+      const lyricsStr = "ha- ppy _ birth- day _ to _ you";
+
+      function tokenize(s) {
+        return s.trim().split(/\s+/);
+      }
+
+      function layout(notesStr, lyricsStr) {
+        const notes = tokenize(notesStr);
+        const lyrics = tokenize(lyricsStr);
+
+        // Normalize lyric array length to notes length
+        // "_" or "" means no new syllable under this note (melisma/hold)
+        const L = [];
+        let lastSyllable = "";
+        for (let i = 0; i < notes.length; i++) {
+          let syl = lyrics[i] ?? "";
+          if (syl === "_" || syl === "") {
+            L.push(""); // keep the cell empty (sustain)
+          } else {
+            // render hyphenated syllables without trailing hyphen visually
+            L.push(syl.replace(/-$/, ""));
+            lastSyllable = syl;
+          }
+        }
+
+        const root = document.getElementById("score");
+        root.innerHTML = "";
+        notes.forEach((note, i) => {
+          const cell = document.createElement("div");
+          cell.className = "cell";
+
+          const n = document.createElement("div");
+          n.className = "note";
+          n.textContent = note;
+
+          const l = document.createElement("div");
+          l.className = "lyric";
+          l.textContent = L[i];
+
+          cell.appendChild(n);
+          cell.appendChild(l);
+          root.appendChild(cell);
+        });
+      }
+
+      layout(notesStr, lyricsStr);
+    </script>
+  </body>
+</html>

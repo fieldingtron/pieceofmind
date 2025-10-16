@@ -10,9 +10,12 @@
     <!-- Main Content -->
     <div class="container mx-auto px-4 py-16">
       <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-4xl font-bold text-gray-800 mb-4">Crotch Sac™</h1>
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">
+          Crotch Sac<span class="align-sub text-base">™</span>
+        </h1>
         <p class="text-lg text-gray-600 mb-8">
-          Experience ultimate comfort and support with our premium Crotch Sac™
+          Experience comfort and support of your premium Crotch Sac between your
+          legs
         </p>
       </div>
 
@@ -21,7 +24,9 @@
         <!-- Form Header -->
         <div class="bg-blue-600 text-white p-6 rounded-t-lg">
           <div class="flex justify-between items-center">
-            <h2 class="text-2xl font-bold">Order Crotch Sac™</h2>
+            <h2 class="text-2xl font-bold">
+              Order Crotch Sac<span class="align-sub text-base">™</span>
+            </h2>
           </div>
           <p class="text-blue-100 mt-2">
             Fill out the form below to customize your order
@@ -49,7 +54,7 @@
                     name="firstName"
                     required
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="John"
+                    placeholder="Wade"
                   />
                 </div>
                 <div>
@@ -64,7 +69,7 @@
                     name="lastName"
                     required
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Doe"
+                    placeholder="Waterman"
                   />
                 </div>
               </div>
@@ -87,12 +92,13 @@
                 <label
                   for="phone"
                   class="block text-sm font-medium text-gray-700 mb-1"
-                  >Phone Number</label
+                  >Phone Number <span class="text-red-500">*</span></label
                 >
                 <input
                   type="tel"
                   id="phone"
                   name="phone"
+                  required
                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="(555) 123-4567"
                   autocomplete="off"
@@ -103,12 +109,13 @@
                 <label
                   for="street"
                   class="block text-sm font-medium text-gray-700 mb-1"
-                  >Street Address</label
+                  >Street Address <span class="text-red-500">*</span></label
                 >
                 <input
                   type="text"
                   id="street"
                   name="street"
+                  required
                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="123 Main St"
                 />
@@ -118,28 +125,30 @@
                   <label
                     for="city"
                     class="block text-sm font-medium text-gray-700 mb-1"
-                    >City</label
+                    >City <span class="text-red-500">*</span></label
                   >
                   <input
                     type="text"
                     id="city"
                     name="city"
+                    required
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Portland"
+                    placeholder="Boulder"
                   />
                 </div>
                 <div>
                   <label
                     for="state"
                     class="block text-sm font-medium text-gray-700 mb-1"
-                    >State / Province</label
+                    >State / Province <span class="text-red-500">*</span></label
                   >
                   <input
                     type="text"
                     id="state"
                     name="state"
+                    required
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="OR"
+                    placeholder="CO"
                   />
                 </div>
               </div>
@@ -148,26 +157,29 @@
                   <label
                     for="zip"
                     class="block text-sm font-medium text-gray-700 mb-1"
-                    >ZIP / Postal Code</label
+                    >ZIP / Postal Code
+                    <span class="text-red-500">*</span></label
                   >
                   <input
                     type="text"
                     id="zip"
                     name="zip"
+                    required
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="97205"
+                    placeholder="80303"
                   />
                 </div>
                 <div>
                   <label
                     for="country"
                     class="block text-sm font-medium text-gray-700 mb-1"
-                    >Country</label
+                    >Country <span class="text-red-500">*</span></label
                   >
                   <input
                     type="text"
                     id="country"
                     name="country"
+                    required
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="USA"
                   />
@@ -188,50 +200,102 @@
             <!-- Crotch-Sac Customizations -->
             <div class="border-b pb-4">
               <h3 class="text-lg font-semibold text-gray-800 mb-3">
-                Crotch-Sac™ Customizations
+                Crotch-Sac<span class="align-sub text-base">™</span>
+                Customizations
               </h3>
+
+              <!-- Edition Choice -->
+              <div class="border-b pb-4 mt-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                  Choose Edition
+                </h3>
+                <div class="flex flex-col md:flex-row gap-4">
+                  <label class="flex items-center cursor-pointer">
+                    <input
+                      type="radio"
+                      name="edition"
+                      value="Cross-Zip"
+                      required
+                      checked
+                      class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    />
+                    <span class="ml-2 text-sm text-gray-700">
+                      Cross-Zip Edition
+                      <span class="ml-2 text-gray-400 text-xs align-middle"
+                        >($125)</span
+                      >
+                    </span>
+                  </label>
+                  <label class="flex items-center cursor-pointer">
+                    <input
+                      type="radio"
+                      name="edition"
+                      value="Clam-Shell"
+                      required
+                      class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    />
+                    <span
+                      class="ml-2 text-sm text-gray-700 text-xs align-middle"
+                    >
+                      Cross-Shell Edition
+                      <span class="ml-2 text-gray-400">($140)</span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label
                     for="bagColor"
                     class="block text-sm font-medium text-gray-700 mb-1"
-                    >Bag Color</label
+                    >Bag Color <span class="text-red-500">*</span></label
                   >
-                  <input
-                    type="text"
+                  <select
                     id="bagColor"
                     name="bagColor"
+                    required
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="e.g. Blue"
-                  />
+                  >
+                    <option value="" disabled selected>Select a color</option>
+                    <option value="Orange">Orange</option>
+                    <option value="Blue">Blue</option>
+                    <option value="Teal">Teal</option>
+                    <option value="Neon-Green">Neon-Green</option>
+                    <option value="Forest-Green">Forest-Green</option>
+                    <option value="Gray">Gray</option>
+                    <option value="Red">Red</option>
+                    <option value="Yellow">Yellow</option>
+                    <option value="Surprise Me">Surprise Me</option>
+                  </select>
                 </div>
                 <div>
                   <label
                     for="trimColor"
                     class="block text-sm font-medium text-gray-700 mb-1"
-                    >Trim Color</label
+                    >Trim Color <span class="text-red-500">*</span></label
                   >
-                  <input
-                    type="text"
+                  <select
                     id="trimColor"
                     name="trimColor"
+                    required
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="e.g. Red"
-                  />
+                  >
+                    <option value="" disabled selected>Select a color</option>
+                    <option value="Orange">Orange</option>
+                    <option value="Blue">Blue</option>
+                    <option value="Teal">Teal</option>
+                    <option value="Neon-Green">Neon-Green</option>
+                    <option value="Forest-Green">Forest-Green</option>
+                    <option value="Gray">Gray</option>
+                    <option value="Red">Red</option>
+                    <option value="Yellow">Yellow</option>
+                    <option value="Surprise Me">Surprise Me</option>
+                  </select>
                 </div>
               </div>
-              <div class="mt-4 flex items-center">
-                <input
-                  type="checkbox"
-                  id="surpriseMe"
-                  name="surpriseMe"
-                  class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                />
-                <label for="surpriseMe" class="ml-2 text-sm text-gray-700"
-                  >Surprise Me!</label
-                >
-              </div>
             </div>
+
             <!-- Add-ons -->
             <div class="border-b pb-4">
               <h3 class="text-lg font-semibold text-gray-800 mb-3">Add-ons</h3>
@@ -243,15 +307,18 @@
                     name="topoMap"
                     class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                   />
-                  <label for="topoMap" class="ml-2 text-sm text-gray-700"
-                    >Topo Map</label
-                  >
+                  <label for="topoMap" class="ml-2 text-sm text-gray-700">
+                    Custom Topo-Map
+                    <span class="ml-2 text-gray-400 text-xs align-middle"
+                      >$50</span
+                    >
+                  </label>
                 </div>
                 <div class="mt-2">
                   <label
                     for="drainageText"
                     class="block text-sm font-medium text-gray-700 mb-1"
-                    >Enter Drainage (Topo Map)</label
+                    >Enter Drainage (Topo-Map)</label
                   >
                   <input
                     type="text"
@@ -270,8 +337,11 @@
                     class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                   />
                   <label for="paddleClips" class="ml-2 text-sm text-gray-700"
-                    >Paddle Clips</label
-                  >
+                    >Paddle-Clips
+                    <span class="ml-2 text-gray-400 text-xs align-middle"
+                      >($40)</span
+                    >
+                  </label>
                 </div>
                 <div class="flex items-center">
                   <input
@@ -281,9 +351,27 @@
                     class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                   />
                   <label for="paddedBody" class="ml-2 text-sm text-gray-700"
-                    >Padded Body</label
-                  >
+                    >Padded-Body
+                    <span class="ml-2 text-gray-400 text-xs align-middle"
+                      >($40)</span
+                    >
+                  </label>
                 </div>
+                <div class="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="paddedEnds"
+                    name="paddedEnds"
+                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <label for="paddedEnds" class="ml-2 text-sm text-gray-700">
+                    Padded Ends
+                    <span class="text-gray-400 text-xs align-middle ml-2"
+                      >($20) (*$10 if combined with Padded-Body)</span
+                    >
+                  </label>
+                </div>
+
                 <div class="flex items-center">
                   <input
                     type="checkbox"
@@ -294,8 +382,11 @@
                   <label
                     for="happySwimsValve"
                     class="ml-2 text-sm text-gray-700"
-                    >Happy Swims Inflation Valve</label
-                  >
+                    >Happy-Swims Inflation Valve
+                    <span class="text-gray-400 text-xs align-middle ml-2"
+                      >($50)</span
+                    >
+                  </label>
                 </div>
                 <div class="flex items-center">
                   <input
@@ -305,8 +396,11 @@
                     class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                   />
                   <label for="packTowel" class="ml-2 text-sm text-gray-700"
-                    >Pack Towel</label
-                  >
+                    >Pack-Towel
+                    <span class="text-gray-400 text-xs align-middle ml-2"
+                      >($20)</span
+                    >
+                  </label>
                 </div>
                 <div class="flex items-center">
                   <input
@@ -316,7 +410,10 @@
                     class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                   />
                   <label for="keyRing" class="ml-2 text-sm text-gray-700"
-                    >Key Ring</label
+                    >Key-Ring<span
+                      class="text-gray-400 text-xs align-middle ml-2"
+                      >($15)</span
+                    ></label
                   >
                 </div>
                 <div class="flex items-center">
@@ -327,11 +424,110 @@
                     class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                   />
                   <label for="phoneStrap" class="ml-2 text-sm text-gray-700"
-                    >Phone Strap</label
+                    >Phone-Strap<span
+                      class="text-gray-400 text-xs align-middle ml-2"
+                      >($20)</span
+                    ></label
                   >
                 </div>
               </div>
             </div>
+
+            <!-- Cost Calculation -->
+            <div class="border-b pb-4">
+              <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                Cost Calculation
+              </h3>
+              <textarea
+                id="costCalculation"
+                name="costCalculation"
+                rows="3"
+                readonly
+                class="w-full px-3 py-2 border border-gray-300 bg-gray-50 rounded-md focus:outline-none"
+                placeholder="Total cost will be calculated here..."
+              ></textarea>
+            </div>
+            <script>
+              // Cost mapping
+              const basePrices = {
+                "Cross-Zip": 125,
+                "Clam-Shell": 140,
+              };
+              const addOnPrices = {
+                topoMap: 50,
+                paddleClips: 40,
+                paddedBody: 40,
+                paddedEnds: 20, // Will adjust if paddedBody is also selected
+                happySwimsValve: 50,
+                packTowel: 20,
+                keyRing: 15,
+                phoneStrap: 20,
+              };
+
+              function calculateCost() {
+                const form = document.getElementById("orderForm");
+                const edition = form.edition.value;
+                let total = basePrices[edition] || 0;
+                let details = [
+                  `Base (${edition}): $${basePrices[edition] || 0}`,
+                ];
+
+                // Add-ons
+                if (form.topoMap.checked) {
+                  total += addOnPrices.topoMap;
+                  details.push("Custom Topo-Map: $50");
+                }
+                if (form.paddleClips.checked) {
+                  total += addOnPrices.paddleClips;
+                  details.push("Paddle-Clips: $40");
+                }
+                if (form.paddedBody.checked && form.paddedEnds.checked) {
+                  total += addOnPrices.paddedBody + 10; // paddedEnds is $10 if paddedBody is selected
+                  details.push("Padded-Body: $40");
+                  details.push("Padded Ends (with Padded-Body): $10");
+                } else {
+                  if (form.paddedBody.checked) {
+                    total += addOnPrices.paddedBody;
+                    details.push("Padded-Body: $40");
+                  }
+                  if (form.paddedEnds.checked) {
+                    total += addOnPrices.paddedEnds;
+                    details.push("Padded Ends: $20");
+                  }
+                }
+                if (form.happySwimsValve.checked) {
+                  total += addOnPrices.happySwimsValve;
+                  details.push("Happy-Swims Inflation Valve: $50");
+                }
+                if (form.packTowel.checked) {
+                  total += addOnPrices.packTowel;
+                  details.push("Pack-Towel: $20");
+                }
+                if (form.keyRing.checked) {
+                  total += addOnPrices.keyRing;
+                  details.push("Key-Ring: $15");
+                }
+                if (form.phoneStrap.checked) {
+                  total += addOnPrices.phoneStrap;
+                  details.push("Phone-Strap: $20");
+                }
+
+                details.push(`Total: $${total}`);
+                document.getElementById("costCalculation").value =
+                  details.join("\n");
+              }
+
+              // Attach event listeners
+              document.addEventListener("DOMContentLoaded", function () {
+                const form = document.getElementById("orderForm");
+                // Listen to all relevant fields
+                [
+                  ...form.querySelectorAll("input[type=radio][name=edition]"),
+                  ...form.querySelectorAll("input[type=checkbox]"),
+                ].forEach((el) => el.addEventListener("change", calculateCost));
+                calculateCost();
+              });
+            </script>
 
             <!-- Special Instructions -->
             <div>

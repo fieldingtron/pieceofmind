@@ -22,15 +22,16 @@ export default async function handler(req, res) {
   }
 
   try {
+    const toAddress = process.env.EMAILTO;
     console.log("[Resend] Sending email", {
       from: "hello@fieldsmarshall.com",
-      to: "yann@pieceofmindfab.com",
+      to: toAddress,
       subject,
       html,
     });
     const data = await resend.emails.send({
       from: "hello@fieldsmarshall.com", // Verified sender
-      to: "yann@pieceofmindfab.com", // Fixed recipient
+      to: toAddress, // Recipient from ENV
       subject,
       html,
     });

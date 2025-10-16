@@ -141,11 +141,14 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     }
 
-    parts.push(
-      `<div class="section"><strong>Total:</strong> $${escapeHtml(
-        orderData.totalPrice || ""
-      )}</div>`
-    );
+    // Cost Calculation (all details)
+    if (orderData.costCalculation) {
+      parts.push(
+        `<div class="section"><h2>Order Pricing Details</h2><pre style="background:#f3f4f6;padding:12px;border-radius:6px;">${escapeHtml(
+          orderData.costCalculation
+        )}</pre></div>`
+      );
+    }
     parts.push(`</div></body></html>`);
     return parts.join("\n");
   }
@@ -243,11 +246,22 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // Calculate total
-      let totalPrice = 29.99;
-      totalPrice += orderData.quantity ? (orderData.quantity - 1) * 29.99 : 0;
+      let totalPrice = 0;
+      if (orderData.edition === "Cross-Zip") {
+        totalPrice = 125;
+      } else if (orderData.edition === "Clam-Shell") {
+        totalPrice = 140;
+      }
+      // If quantity is supported, multiply
+      if (orderData.quantity) {
+        totalPrice *= parseInt(orderData.quantity, 10);
+      }
       if (orderData.giftWrap) totalPrice += 5.0;
       if (orderData.rushDelivery) totalPrice += 15.0;
       if (orderData.customization) totalPrice += 10.0;
+      if (orderData.topoMap) totalPrice += 50.0;
+      if (orderData.paddedEnds) totalPrice += 20.0;
+      if (orderData.paddedEnds) totalPrice += 20.0;
       orderData.totalPrice = totalPrice.toFixed(2);
 
       // Basic validation
@@ -353,11 +367,20 @@ orderForm.addEventListener("submit", async (e) => {
     });
 
     // Calculate total price
-    let totalPrice = 29.99; // Base price
-    totalPrice += orderData.quantity ? (orderData.quantity - 1) * 29.99 : 0;
+    let totalPrice = 0;
+    if (orderData.edition === "Cross-Zip") {
+      totalPrice = 125;
+    } else if (orderData.edition === "Clam-Shell") {
+      totalPrice = 140;
+    }
+    // If quantity is supported, multiply
+    if (orderData.quantity) {
+      totalPrice *= parseInt(orderData.quantity, 10);
+    }
     if (orderData.giftWrap) totalPrice += 5.0;
     if (orderData.rushDelivery) totalPrice += 15.0;
     if (orderData.customization) totalPrice += 10.0;
+    if (orderData.topoMap) totalPrice += 50.0;
     orderData.totalPrice = totalPrice.toFixed(2);
     console.log("[Form] Calculated totalPrice:", orderData.totalPrice);
 
