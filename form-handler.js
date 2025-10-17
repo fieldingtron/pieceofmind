@@ -367,22 +367,20 @@ orderForm.addEventListener("submit", async (e) => {
     });
 
     // Calculate total price
-    let totalPrice = 0;
-    if (orderData.edition === "Cross-Zip") {
-      totalPrice = 125;
-    } else if (orderData.edition === "Clam-Shell") {
-      totalPrice = 140;
+    // Use costCalculation textarea value for cost details and total
+    const costCalculationEl = document.getElementById("costCalculation");
+    if (costCalculationEl) {
+      orderData.costCalculation = costCalculationEl.value;
+      // Try to extract total from the last line
+      const lines = costCalculationEl.value.split("\n");
+      const totalLine = lines.find((l) => l.toLowerCase().startsWith("total:"));
+      if (totalLine) {
+        const match = totalLine.match(/\$([\d\.]+)/);
+        if (match) {
+          orderData.totalPrice = match[1];
+        }
+      }
     }
-    // If quantity is supported, multiply
-    if (orderData.quantity) {
-      totalPrice *= parseInt(orderData.quantity, 10);
-    }
-    if (orderData.giftWrap) totalPrice += 5.0;
-    if (orderData.rushDelivery) totalPrice += 15.0;
-    if (orderData.customization) totalPrice += 10.0;
-    if (orderData.topoMap) totalPrice += 50.0;
-    orderData.totalPrice = totalPrice.toFixed(2);
-    console.log("[Form] Calculated totalPrice:", orderData.totalPrice);
 
     // Validate required fields
     if (!orderData.firstName || !orderData.lastName || !orderData.email) {
@@ -412,14 +410,20 @@ orderForm.addEventListener("submit", async (e) => {
     // Show success message
     console.log("[Form] Order sent successfully");
     successMessage.classList.remove("hidden");
-
-    // Reset the form but keep the success message visible
-    orderForm.reset();
-
-    // Re-enable submit button
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Submit Another Order";
-    submitBtn.classList.remove("opacity-75", "cursor-not-allowed");
+    // Disable form for 2 minutes, keep data visible
+    Array.from(orderForm.elements).forEach((el) => {
+      if (el.tagName !== "BUTTON") {
+        el.disabled = true;
+      }
+    });
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Please wait 2 minutes...";
+    setTimeout(() => {
+      Array.from(orderForm.elements).forEach((el) => {
+        el.disabled = false;
+      });
+      submitBtn.textContent = "Submit Order";
+    }, 120000);
   } catch (error) {
     // Show error message
     console.error("[Form] Error during submission:", error);
