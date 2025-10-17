@@ -82,49 +82,52 @@ document.addEventListener("DOMContentLoaded", () => {
     parts.push(`</div>`);
 
     // Customizations
-    const customizationLines = [];
+
+    const basicOrder = [];
+
+    if (orderData.edition === "Cross-Zip") {
+      basicOrder.push(`<p><span class="label">Edition:</span> Cross-Zip</p>`);
+    } else if (orderData.edition === "Clam-Shell") {
+      basicOrder.push(`<p><span class="label">Edition:</span> Clam-Shell</p>`);
+    } else if (orderData.edition) {
+      basicOrder.push(
+        `<p><span class="label">Edition:</span> ${escapeHtml(
+          orderData.edition
+        )}</p>`
+      );
+    }
     if (orderData.bagColor)
-      customizationLines.push(
+      basicOrder.push(
         `<p><span class="label">Bag Color:</span> ${escapeHtml(
           orderData.bagColor
         )}</p>`
       );
     if (orderData.trimColor)
-      customizationLines.push(
+      basicOrder.push(
         `<p><span class="label">Trim Color:</span> ${escapeHtml(
           orderData.trimColor
         )}</p>`
       );
-    if (orderData.surpriseMe)
-      customizationLines.push(
-        `<p><span class="label">Surprise Me:</span> Yes</p>`
-      );
-    if (orderData.topoMap)
-      customizationLines.push(
-        `<p><span class="label">Topo Map:</span> Yes</p>`
-      );
-    if (orderData.drainageText)
-      customizationLines.push(
-        `<p><span class="label">Drainage:</span> ${escapeHtml(
-          orderData.drainageText
-        )}</p>`
-      );
-    if (customizationLines.length) {
+
+    if (basicOrder.length) {
       parts.push(
-        `<div class="section"><h2>Customizations & Add-ons</h2>${customizationLines.join(
-          ""
-        )}</div>`
+        `<div class="section"><h2>Order Detail</h2>${basicOrder.join("")}</div>`
       );
     }
 
     // Add-ons
     const addons = [];
+
+    if (orderData.topoMap) addons.push("Topo Map");
+    if (orderData.drainageText)
+      addons.push(`Drainage: ${escapeHtml(orderData.drainageText)}`);
     if (orderData.paddleClips) addons.push("Paddle Clips");
     if (orderData.paddedBody) addons.push("Padded Body");
     if (orderData.happySwimsValve) addons.push("Happy Swims Inflation Valve");
     if (orderData.packTowel) addons.push("Pack Towel");
     if (orderData.keyRing) addons.push("Key Ring");
     if (orderData.phoneStrap) addons.push("Phone Strap");
+
     if (addons.length) {
       parts.push(
         `<div class="section"><h2>Add-ons</h2><ul>${addons
