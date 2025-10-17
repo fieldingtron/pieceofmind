@@ -344,66 +344,71 @@ orderForm.addEventListener("submit", async (e) => {
   try {
     // Gather form data
     const formData = new FormData(orderForm);
-    const orderData = {};
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Submitting...";
+    submitBtn.classList.add("opacity-75", "cursor-not-allowed");
 
-    formData.forEach((value, key) => {
-      if (
-        key === "giftWrap" ||
-        key === "rushDelivery" ||
-        key === "customization"
-      ) {
-        orderData[key] = true;
-      } else {
-        orderData[key] = value;
-      }
-    });
-    console.log("[Form] Gathered orderData:", orderData);
-
-    // Add unchecked checkboxes
-    if (!orderData.giftWrap) orderData.giftWrap = false;
-    if (!orderData.rushDelivery) orderData.rushDelivery = false;
-    if (!orderData.customization) orderData.customization = false;
-    console.log("[Form] Checkbox normalization:", {
-      giftWrap: orderData.giftWrap,
-      rushDelivery: orderData.rushDelivery,
-      customization: orderData.customization,
-    });
-
-    // Calculate total price
-    // Use costCalculation textarea value for cost details and total
-    const costCalculationEl = document.getElementById("costCalculation");
-    if (costCalculationEl) {
-      orderData.costCalculation = costCalculationEl.value;
-      // Try to extract total from the last line
-      const lines = costCalculationEl.value.split("\n");
-      const totalLine = lines.find((l) => l.toLowerCase().startsWith("total:"));
-      if (totalLine) {
-        const match = totalLine.match(/\$([\d\.]+)/);
-        if (match) {
-          orderData.totalPrice = match[1];
+    try {
+      const formData = new FormData(orderForm);
+      const orderData = {};
+      formData.forEach((value, key) => {
+        if (
+          key === "giftWrap" ||
+          key === "rushDelivery" ||
+          key === "customization"
+        ) {
+          orderData[key] = true;
+        } else {
+          orderData[key] = value;
+        }
+      });
+      // Use costCalculation textarea value for cost details and total
+      const costCalculationEl = document.getElementById("costCalculation");
+      if (costCalculationEl) {
+        orderData.costCalculation = costCalculationEl.value;
+        // Try to extract total from the last line
+        const lines = costCalculationEl.value.split("\n");
+        const totalLine = lines.find((l) =>
+          l.toLowerCase().startsWith("total:")
+        );
+        if (totalLine) {
+          const match = totalLine.match(/\$([\d\.]+)/);
+          if (match) {
+            orderData.totalPrice = match[1];
+          }
         }
       }
-    }
-
-    // Validate required fields
-    if (!orderData.firstName || !orderData.lastName || !orderData.email) {
-      console.error("[Form] Missing required fields", orderData);
-      throw new Error("Please fill in all required fields");
-    }
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(orderData.email)) {
-      console.error("[Form] Invalid email format", orderData.email);
-      throw new Error("Please enter a valid email address");
-    }
-
-    // Validate customization text if checked
-    if (orderData.customization && !orderData.embroideryText) {
-      console.error("[Form] Missing embroidery text");
-      throw new Error(
-        "Please enter embroidery text or uncheck the customization option"
-      );
+      console.log("[Form] Sending orderData to API:", orderData);
+      await sendOrderEmail(orderData);
+      // Show success message
+      console.log("[Form] Order sent successfully");
+      successMessage.classList.remove("hidden");
+      // Disable all form fields except the submit button for 5 minutes
+      Array.from(orderForm.elements).forEach((el) => {
+        if (el !== submitBtn) {
+          el.disabled = true;
+        }
+      });
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Please wait 5 minutes...";
+      // Keep all field values visible (do not reset)
+      // Re-enable after 5 minutes
+      setTimeout(() => {
+        Array.from(orderForm.elements).forEach((el) => {
+          el.disabled = false;
+        });
+        submitBtn.textContent = "Submit Order";
+        submitBtn.classList.remove("opacity-75", "cursor-not-allowed");
+      }, 300000);
+    } catch (error) {
+      // Show error message
+      console.error("[Form] Error during submission:", error);
+      errorMessage.classList.remove("hidden");
+      document.getElementById("errorText").textContent = error.message;
+      // Re-enable submit button
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Submit Order";
+      submitBtn.classList.remove("opacity-75", "cursor-not-allowed");
     }
 
     // Send data to Resend API
