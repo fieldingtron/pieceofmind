@@ -158,6 +158,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function sendOrderEmail(orderData) {
     const emailContent = formatOrderEmail(orderData);
+    // Simulate success on localhost/127.0.0.1
+    if (
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1"
+    ) {
+      console.log("[Form] Simulating email send (localhost):", {
+        to: orderData.email,
+        subject: `Order Confirmation: Crotch Sac™`,
+        html: emailContent,
+      });
+      await new Promise((resolve) => setTimeout(resolve, 500)); // Simulate network delay
+      return true;
+    }
+    // Real API call for production
     try {
       console.log("[Form] API call payload:", {
         to: orderData.email,
@@ -283,7 +297,11 @@ document.addEventListener("DOMContentLoaded", () => {
       await sendOrderEmail(orderData);
 
       if (successMessage) successMessage.classList.remove("hidden");
-      orderForm.reset();
+      // Keep submit button disabled after successful submission
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Order Submitted";
+      }
     } catch (error) {
       console.error("[Form] Error during submission:", error);
       if (errorMessage) {
@@ -291,7 +309,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const et = document.getElementById("errorText");
         if (et) et.textContent = error.message;
       }
-    } finally {
+      // Re-enable submit button only on error
       if (submitBtn) {
         submitBtn.disabled = false;
         submitBtn.textContent = "Submit Order";
@@ -302,170 +320,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   console.log("Form handler initialized");
 });
-// Form elements
-const orderForm = document.getElementById("orderForm");
-const customizationCheckbox = document.getElementById("customization");
-const customizationTextDiv = document.getElementById("customizationText");
-const errorMessage = document.getElementById("errorMessage");
-const successMessage = document.getElementById("successMessage");
-const submitBtn = document.getElementById("submitBtn");
-
-// Helper function to reset form messages
-function resetFormMessages() {
-  errorMessage.classList.add("hidden");
-  successMessage.classList.add("hidden");
-}
-
-// Show/hide customization text field
-customizationCheckbox.addEventListener("change", () => {
-  if (customizationCheckbox.checked) {
-    customizationTextDiv.classList.remove("hidden");
-  } else {
-    customizationTextDiv.classList.add("hidden");
-    document.getElementById("embroideryText").value = "";
-  }
-});
-
-// Form validation and submission
-orderForm.addEventListener("submit", async (e) => {
-  // Stop the default form submission which would cause page reload
-  e.preventDefault();
-  e.stopPropagation();
-
-  console.log("[Form] Submit triggered");
-  // Hide previous messages
-  resetFormMessages();
-
-  // Disable submit button to prevent double submission
-  submitBtn.disabled = true;
-  submitBtn.textContent = "Submitting...";
-  submitBtn.classList.add("opacity-75", "cursor-not-allowed");
-
-  try {
-    // Gather form data
-    const formData = new FormData(orderForm);
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Submitting...";
-    submitBtn.classList.add("opacity-75", "cursor-not-allowed");
-
-    try {
-      const formData = new FormData(orderForm);
-      const orderData = {};
-      formData.forEach((value, key) => {
-        if (
-          key === "giftWrap" ||
-          key === "rushDelivery" ||
-          key === "customization"
-        ) {
-          orderData[key] = true;
-        } else {
-          orderData[key] = value;
-        }
-      });
-      // Use costCalculation textarea value for cost details and total
-      const costCalculationEl = document.getElementById("costCalculation");
-      if (costCalculationEl) {
-        orderData.costCalculation = costCalculationEl.value;
-        // Try to extract total from the last line
-        const lines = costCalculationEl.value.split("\n");
-        const totalLine = lines.find((l) =>
-          l.toLowerCase().startsWith("total:")
-        );
-        if (totalLine) {
-          const match = totalLine.match(/\$([\d\.]+)/);
-          if (match) {
-            orderData.totalPrice = match[1];
-          }
-        }
-      }
-      console.log("[Form] Sending orderData to API:", orderData);
-      await sendOrderEmail(orderData);
-      // Show success message
-      console.log("[Form] Order sent successfully");
-      successMessage.classList.remove("hidden");
-      // Disable all form fields except the submit button for 5 minutes
-      Array.from(orderForm.elements).forEach((el) => {
-        if (el !== submitBtn) {
-          el.disabled = true;
-        }
-      });
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Please wait 5 minutes...";
-      // Keep all field values visible (do not reset)
-      // Re-enable after 5 minutes
-      setTimeout(() => {
-        Array.from(orderForm.elements).forEach((el) => {
-          el.disabled = false;
-        });
-        submitBtn.textContent = "Submit Order";
-        submitBtn.classList.remove("opacity-75", "cursor-not-allowed");
-      }, 300000);
-    } catch (error) {
-      // Show error message
-      console.error("[Form] Error during submission:", error);
-      errorMessage.classList.remove("hidden");
-      document.getElementById("errorText").textContent = error.message;
-      // Re-enable submit button
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Submit Order";
-      submitBtn.classList.remove("opacity-75", "cursor-not-allowed");
-    }
-
-    // Send data to Resend API
-    console.log("[Form] Sending orderData to API:", orderData);
-    await sendOrderEmail(orderData);
-
-    // Show success message
-    console.log("[Form] Order sent successfully");
-    successMessage.classList.remove("hidden");
-    // Disable form for 2 minutes, keep data visible
-    Array.from(orderForm.elements).forEach((el) => {
-      if (el.tagName !== "BUTTON") {
-        el.disabled = true;
-      }
-    });
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Please wait 2 minutes...";
-    setTimeout(() => {
-      Array.from(orderForm.elements).forEach((el) => {
-        el.disabled = false;
-      });
-      submitBtn.textContent = "Submit Order";
-    }, 120000);
-  } catch (error) {
-    // Show error message
-    console.error("[Form] Error during submission:", error);
-    errorMessage.classList.remove("hidden");
-    document.getElementById("errorText").textContent = error.message;
-
-    // Re-enable submit button
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Submit Order";
-    submitBtn.classList.remove("opacity-75", "cursor-not-allowed");
-  }
-});
 
 // Function to send email via Resend API
 async function sendOrderEmail(orderData) {
-  // In production, you would replace this URL with your actual backend endpoint
-  // that securely handles the Resend API call with your API key
-  // Format the email content
   const emailContent = formatOrderEmail(orderData);
-
+  // If running on localhost, simulate a successful send
+  if (
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1"
+  ) {
+    console.log("[Form] Simulating email send (localhost):", {
+      to: orderData.email,
+      subject: `Order Confirmation: Crotch Sac™`,
+      html: emailContent,
+    });
+    await new Promise((resolve) => setTimeout(resolve, 500)); // Simulate network delay
+    return true;
+  }
+  // ...existing code for real API call...
   try {
-    // Prepare API call to Resend endpoint
     console.log("[Form] API call payload:", {
       to: orderData.email,
       subject: `Order Confirmation: Crotch Sac™`,
       html: emailContent,
     });
-
-    // Make sure we're using the correct endpoint
     const response = await fetch("/api/send-email", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         to: orderData.email,
         subject: `Order Confirmation: Crotch Sac™`,
