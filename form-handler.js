@@ -273,13 +273,13 @@ document.addEventListener("DOMContentLoaded", () => {
       if (orderData.quantity) {
         totalPrice *= parseInt(orderData.quantity, 10);
       }
-  if (orderData.giftWrap) totalPrice += 5.0;
-  if (orderData.rushDelivery) totalPrice += 15.0;
-  if (orderData.customization) totalPrice += 10.0;
-  if (orderData.topoMap) totalPrice += 50.0;
-  if (orderData.badgeNumber) totalPrice += 30.0;
-  if (orderData.paddedEnds) totalPrice += 20.0;
-  if (orderData.paddedEnds) totalPrice += 20.0;
+      if (orderData.giftWrap) totalPrice += 5.0;
+      if (orderData.rushDelivery) totalPrice += 15.0;
+      if (orderData.customization) totalPrice += 10.0;
+      if (orderData.topoMap) totalPrice += 50.0;
+      if (orderData.badgeNumber) totalPrice += 30.0;
+      if (orderData.paddedEnds) totalPrice += 20.0;
+      if (orderData.paddedEnds) totalPrice += 20.0;
       orderData.totalPrice = totalPrice.toFixed(2);
 
       // Basic validation
