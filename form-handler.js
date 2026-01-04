@@ -265,9 +265,9 @@ document.addEventListener("DOMContentLoaded", () => {
       // Calculate total
       let totalPrice = 0;
       if (orderData.edition === "Cross-Zip") {
-        totalPrice = 125;
+        totalPrice = 130;
       } else if (orderData.edition === "Clam-Shell") {
-        totalPrice = 140;
+        totalPrice = 160;
       }
       // If quantity is supported, multiply
       if (orderData.quantity) {
