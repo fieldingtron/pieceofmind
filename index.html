@@ -209,18 +209,18 @@
                   placeholder="Drainage details" />
               </div>
               <div class="flex items-center mt-4">
-                <input type="checkbox" id="badgeNumber" name="badgeNumber"
+                <input type="checkbox" id="badgeText" name="badgeText"
                   class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
-                <label for="badgeNumber" class="ml-2 text-sm text-gray-700">
-                  Badge Number
+                <label for="badgeText" class="ml-2 text-sm text-gray-700">
+                  Name / Phone Number / Custom Badge
                   <span class="ml-2 text-gray-400 text-xs align-middle">$30</span>
                 </label>
               </div>
               <div class="mt-2">
-                <label for="badgeDetails" class="block text-sm font-medium text-gray-700 mb-1">Badge Details</label>
-                <input type="text" id="badgeDetails" name="badgeDetails" maxlength="30"
+                <label for="badgeTextDetails" class="block text-sm font-medium text-gray-700 mb-1">Badge Text</label>
+                <input type="text" id="badgeTextDetails" name="badgeTextDetails" maxlength="30"
                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Badge details" />
+                  placeholder="Name, phone number, or custom text" />
               </div>
               <div class="flex items-center">
                 <input type="checkbox" id="paddleClips" name="paddleClips"
@@ -299,7 +299,7 @@
               packTowel: 20,
               keyRing: 15,
               phoneStrap: 20,
-              badgeNumber: 30,
+              badgeText: 30,
             };
 
             function calculateCost() {
@@ -315,9 +315,9 @@
                 total += addOnPrices.topoMap;
                 details.push("Custom Topo-Map: $50");
               }
-              if (form.badgeNumber.checked) {
-                total += addOnPrices.badgeNumber;
-                details.push("Badge Number: $30");
+              if (form.badgeText.checked) {
+                total += addOnPrices.badgeText;
+                details.push("Name / Phone Number / Custom Badge: $30");
               }
               if (form.paddleClips.checked) {
                 total += addOnPrices.paddleClips;

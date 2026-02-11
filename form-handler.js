@@ -121,6 +121,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (orderData.topoMap) addons.push("Topo Map");
     if (orderData.drainageText)
       addons.push(`Drainage: ${escapeHtml(orderData.drainageText)}`);
+    if (orderData.badgeText) {
+      if (orderData.badgeTextDetails) {
+        addons.push(`Badge Text: ${escapeHtml(orderData.badgeTextDetails)}`);
+      } else {
+        addons.push("Name / Phone Number / Custom Badge");
+      }
+    }
     if (orderData.paddleClips) addons.push("Paddle Clips");
     if (orderData.paddedBody) addons.push("Padded Body");
     if (orderData.happySwimsValve) addons.push("Happy Swims Inflation Valve");
@@ -277,7 +284,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (orderData.rushDelivery) totalPrice += 15.0;
       if (orderData.customization) totalPrice += 10.0;
       if (orderData.topoMap) totalPrice += 50.0;
-      if (orderData.badgeNumber) totalPrice += 30.0;
+      if (orderData.badgeText) totalPrice += 30.0;
       if (orderData.paddedEnds) totalPrice += 20.0;
       if (orderData.paddedEnds) totalPrice += 20.0;
       orderData.totalPrice = totalPrice.toFixed(2);
@@ -292,6 +299,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (orderData.customization && !orderData.embroideryText)
         throw new Error(
           "Please enter embroidery text or uncheck the customization option"
+        );
+      if (orderData.badgeText && !orderData.badgeTextDetails)
+        throw new Error(
+          "Please enter badge text or uncheck the badge text option"
         );
 
       console.log("[Form] Sending orderData to API:", orderData);
