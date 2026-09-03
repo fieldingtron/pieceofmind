@@ -122,7 +122,8 @@ document.addEventListener("DOMContentLoaded", () => {
           key === "happySwimsValve" ||
           key === "packTowel" ||
           key === "keyRing" ||
-          key === "phoneStrap"
+          key === "phoneStrap" ||
+          key === "airTagSleeve"
         ) {
           orderData[key] = true;
         } else {
@@ -166,14 +167,14 @@ document.addEventListener("DOMContentLoaded", () => {
       if (orderData.giftWrap) totalPrice += 5.0;
       if (orderData.rushDelivery) totalPrice += 15.0;
       if (orderData.customization) totalPrice += 10.0;
-      if (orderData.topoMap) totalPrice += 50.0;
+      if (orderData.topoMap) totalPrice += 75.0;
       if (orderData.badgeText) totalPrice += 30.0;
 
       // Calculate padded ends combined with padded body logic accurately
       if (orderData.paddedBody && orderData.paddedEnds) {
-        totalPrice += 50.0; // 40 for body + 10 for ends
+        totalPrice += 60.0; // 50 for body + 10 for ends
       } else {
-        if (orderData.paddedBody) totalPrice += 40.0;
+        if (orderData.paddedBody) totalPrice += 50.0;
         if (orderData.paddedEnds) totalPrice += 20.0;
       }
 
@@ -181,7 +182,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (orderData.packTowel) totalPrice += 20.0;
       if (orderData.keyRing) totalPrice += 15.0;
       if (orderData.phoneStrap) totalPrice += 20.0;
-      if (orderData.paddleClips) totalPrice += 40.0;
+      if (orderData.airTagSleeve) totalPrice += 20.0;
+      if (orderData.paddleClips) totalPrice += 50.0;
 
       orderData.totalPrice = totalPrice.toFixed(2);
 

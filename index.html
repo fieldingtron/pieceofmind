@@ -167,6 +167,7 @@
                   <option value="Gray">Gray</option>
                   <option value="Red">Red</option>
                   <option value="Yellow">Yellow</option>
+                  <option value="White">White</option>
                   <option value="Surprise Me">Surprise Me</option>
                 </select>
               </div>
@@ -184,6 +185,7 @@
                   <option value="Gray">Gray</option>
                   <option value="Red">Red</option>
                   <option value="Yellow">Yellow</option>
+                  <option value="White">White</option>
                   <option value="Surprise Me">Surprise Me</option>
                 </select>
               </div>
@@ -199,7 +201,7 @@
                   class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
                 <label for="topoMap" class="ml-2 text-sm text-gray-700">
                   Custom Topo-Map
-                  <span class="ml-2 text-gray-400 text-xs align-middle">$50</span>
+                  <span class="ml-2 text-gray-400 text-xs align-middle">$75</span>
                 </label>
               </div>
               <div class="mt-2">
@@ -227,14 +229,14 @@
                 <input type="checkbox" id="paddleClips" name="paddleClips"
                   class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
                 <label for="paddleClips" class="ml-2 text-sm text-gray-700">Paddle-Clips
-                  <span class="ml-2 text-gray-400 text-xs align-middle">($40)</span>
+                  <span class="ml-2 text-gray-400 text-xs align-middle">($50)</span>
                 </label>
               </div>
               <div class="flex items-center">
                 <input type="checkbox" id="paddedBody" name="paddedBody"
                   class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
                 <label for="paddedBody" class="ml-2 text-sm text-gray-700">Padded-Body
-                  <span class="ml-2 text-gray-400 text-xs align-middle">($40)</span>
+                  <span class="ml-2 text-gray-400 text-xs align-middle">($50)</span>
                 </label>
               </div>
               <div class="flex items-center">
@@ -272,6 +274,12 @@
                 <label for="phoneStrap" class="ml-2 text-sm text-gray-700">Phone-Strap<span
                     class="text-gray-400 text-xs align-middle ml-2">($20)</span></label>
               </div>
+              <div class="flex items-center">
+                <input type="checkbox" id="airTagSleeve" name="airTagSleeve"
+                  class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
+                <label for="airTagSleeve" class="ml-2 text-sm text-gray-700">AirTag Sleeve<span
+                    class="text-gray-400 text-xs align-middle ml-2">($20)</span></label>
+              </div>
             </div>
           </div>
 
@@ -292,14 +300,15 @@
             };
 
             const addOnPrices = {
-              topoMap: 50,
-              paddleClips: 40,
-              paddedBody: 40,
+              topoMap: 75,
+              paddleClips: 50,
+              paddedBody: 50,
               paddedEnds: 20, // Will adjust if paddedBody is also selected
               happySwimsValve: 50,
               packTowel: 20,
               keyRing: 15,
               phoneStrap: 20,
+              airTagSleeve: 20,
               badgeText: 30,
             };
 
@@ -314,7 +323,7 @@
               // Add-ons
               if (form.topoMap.checked) {
                 total += addOnPrices.topoMap;
-                details.push("Custom Topo-Map: $50");
+                details.push("Custom Topo-Map: $75");
               }
               if (form.badgeText.checked) {
                 total += addOnPrices.badgeText;
@@ -322,16 +331,16 @@
               }
               if (form.paddleClips.checked) {
                 total += addOnPrices.paddleClips;
-                details.push("Paddle-Clips: $40");
+                details.push("Paddle-Clips: $50");
               }
               if (form.paddedBody.checked && form.paddedEnds.checked) {
                 total += addOnPrices.paddedBody + 10; // paddedEnds is $10 if paddedBody is selected
-                details.push("Padded-Body: $40");
+                details.push("Padded-Body: $50");
                 details.push("Padded Ends (with Padded-Body): $10");
               } else {
                 if (form.paddedBody.checked) {
                   total += addOnPrices.paddedBody;
-                  details.push("Padded-Body: $40");
+                  details.push("Padded-Body: $50");
                 }
                 if (form.paddedEnds.checked) {
                   total += addOnPrices.paddedEnds;
@@ -353,6 +362,10 @@
               if (form.phoneStrap.checked) {
                 total += addOnPrices.phoneStrap;
                 details.push("Phone-Strap: $20");
+              }
+              if (form.airTagSleeve.checked) {
+                total += addOnPrices.airTagSleeve;
+                details.push("AirTag Sleeve: $20");
               }
 
               details.push(`Total: $${total}`);

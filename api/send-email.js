@@ -135,6 +135,7 @@ function formatOrderEmail(orderData) {
   if (orderData.packTowel) addons.push("Pack Towel");
   if (orderData.keyRing) addons.push("Key Ring");
   if (orderData.phoneStrap) addons.push("Phone Strap");
+  if (orderData.airTagSleeve) addons.push("AirTag Sleeve");
 
   if (addons.length) {
     parts.push(
